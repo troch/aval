@@ -1,0 +1,36 @@
+{
+  "name": "izit",
+  "version": "0.1.0-alpha.1",
+  "description": "A minimalist property validator",
+  "main": "dist/commonjs/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build.js",
+    "test": "node ./node_modules/mocha/bin/_mocha",
+    "test-cover": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/troch/izit.git"
+  },
+  "keywords": [
+    "validator",
+    "validation",
+    "property",
+    "types"
+  ],
+  "author": "Thomas Roch <thomas.c.roch@gmail.com> (http://blog.reactandbethankful.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/troch/izit/issues"
+  },
+  "homepage": "https://github.com/troch/izit",
+  "devDependencies": {
+    "async": "^1.4.0",
+    "babel": "^5.8.3",
+    "coveralls": "^2.11.3",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5",
+    "should": "^7.0.2"
+  }
+}
