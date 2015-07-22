@@ -13,7 +13,9 @@ function createTypeValidator(type) {
 }
 
 function required(val) {
-    return exists(val) && val !== '';
+    if (!exists(val) || val.length === 0) return false;
+    if (typeof val === 'object') return Object.keys(val).length !== 0;
+    return true;
 }
 
 function gt(limit, val) {
@@ -38,19 +40,31 @@ function lte(limit, val) {
 
 function max(max, val) {
     if (!exists(val)) return null;
-    return val.length !== undefined ? val.length <= max : null;
+    return val.length <= max;
 }
 
 function min(min, val) {
     if (!exists(val)) return null;
-    return val.length !== undefined ? val.length >= min : null;
+    return val.length >= min;
+}
+
+function maxKeys(max, val) {
+    if (!exists(val)) return null;
+    if (typeof val !== 'object') return false;
+    return Object.keys(val).length <= max;
+}
+
+function minKeys(min, val) {
+    if (!exists(val)) return null;
+    if (typeof val !== 'object') return false;
+    return Object.keys(val).length >= min;
 }
 
 function pattern(pattern, val) {
     return pattern.test(val);
 }
 
-let Validators = {required, gt, gte, lt, lte, max, min, pattern};
+let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern};
 
 let types =  ['string', 'number', 'string', 'boolean', 'array', 'object', 'date'];
 

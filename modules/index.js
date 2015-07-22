@@ -1,15 +1,21 @@
 import Validators from './validators';
 
+function addValidator(name, fn) {
+    if (Validators[name]) throw new Error(`Validator named "${name}" already exists`);
+    Validators[name] = fn;
+}
+
 class Izit {
     constructor() {
         this.validators = [];
 
         Object.keys(Validators).forEach((name) => {
-            this[name] = () => {
+            let that = this;
+            this[name] = function() {
                 let args = Array.prototype.slice.call(arguments);
                 // Curry function
-                this.validators.push([name, Function.prototype.bind.apply(Validators[name], [null].concat(args))]);
-                return this;
+                that.validators.push([name, Function.prototype.bind.apply(Validators[name], [null].concat(args))]);
+                return that;
             };
         });
     }
@@ -27,6 +33,7 @@ class Izit {
 }
 
 export default {
+    addValidator,
     Validators,
     Izit() {
         return new Izit;
