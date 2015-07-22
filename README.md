@@ -6,17 +6,17 @@
 
 > A minimalist functional validation library. Inspired by joi, React PropTypes and Angular form validation.
 
-Izit is an ultra lightweight library to help validate JS data.
+Izit is an ultra lightweight library to help validate JS data and is aimed at helping form validation feedback.
 
 ## Why?
 
-There are a LOT of JavaScript data validators, however not a lot of them are pure validators.
-Izit:
+There are a LOT of JavaScript data validators, however here are a few facts about Izit:
 
 - has a nice compact syntax
 - validates data and outputs a detailled validation report containing only boolean values
 - doesn't throw errors or output localised validation messages
 - allows to define custom validators
+- can validate nested properties
 
 ## Installation
 
@@ -101,3 +101,94 @@ from the errors report.
 - __Other__
     - `required()`: required value (null, undefined, empty array, empty object, empty string will all fail)
     - `pattern(regex)`: pattern matching
+
+
+## Custom validator
+
+You can define custom validators. A validator can take a number of arguments, all non-optional, the last being the value
+to validate.
+
+```javascript
+import {Izit, addValidator} from 'izit'
+
+addValidator('matchPwd', function (val) {
+    if (!val) return null;
+    return val.password === val.password2;
+});
+
+let data = {
+    username: 'troch',
+    email: null,
+    password:  'm4g1cPWD'
+    password2: 'm4g1cPWd'
+};
+
+let validator = Izit().object().required().matchPwd();
+
+validator.validate(data);
+// = {
+//     valid: false,
+//     errors: {
+//       object:   false,
+//       required: false,
+//       matchPwd: true
+//     }
+//
+
+```
+
+## Nested properties
+
+You can validate nested properties (as deep as you want).
+
+```javascript
+import {Izit} from 'izit'
+
+let data = {
+    username: 'troch',
+    email: null,
+    password:  'm4g1cPWD'
+    password2: 'm4g1cPWd'
+}
+
+let validator = Izit().object().required().matchPwd()
+    .prop('username', Izit().string().required().min(4))
+    .prop('email',    Izit().string().required().pattern(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/))
+    .prop('password', Izit().string().required().min(5));
+
+validator.validate(data);
+// = {
+//     valid: false,
+//     errors: {
+//       object:   false,
+//       required: false,
+//       matchPwd: true
+//     },
+//     props: {
+//       username: {
+//         valid: true,
+//         errors: {
+//           string:   false,
+//           required: false,
+//           min:      false
+//         }
+//       },
+//       email: {
+//         valid: false,
+//         errors: {
+//           string:   false,
+//           required: true
+//         }
+//       },
+//       password: {
+//         valid: true,
+//         errors: {
+//           string:   false,
+//           required: false,
+//           min:      false
+//         }
+//       }
+//     }
+//   }
+//
+```
