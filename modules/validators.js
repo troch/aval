@@ -64,7 +64,17 @@ function pattern(pattern, val) {
     return pattern.test(val);
 }
 
-let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern};
+function inList(arr, val) {
+    if (!exists(val)) return null;
+    return arr.indexOf(val) !== -1;
+}
+
+function notInList(arr, val) {
+    if (!exists(val)) return null;
+    return arr.indexOf(val) === -1;
+}
+
+let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern, inList, notInList};
 
 let types =  ['string', 'number', 'boolean', 'array', 'object', 'date'];
 

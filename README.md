@@ -29,7 +29,7 @@ It is available on npm:
 Get a new instance of `Izit` and chain validators. Calling `validate(val)`
 will output an object containing a `valid` boolean and a key-value pairs object `errors`.
 
-```
+```javascript
 import {Izit} from 'izit';
 
 let validator = Izit().string().required().min(3);
@@ -69,6 +69,10 @@ validator.validate('hello');
 
 ## Validators
 
+- For all type validators, `null` or `undefined` values won't fail. `required()` will fail them if present.
+- For all other validators, a non-existing value will cause the validator to return `null`, excluding it
+from the errors report.
+
 ### Types
 
 - `string()`
@@ -78,14 +82,19 @@ validator.validate('hello');
 - `array()`
 - `date()`
 
-### Range assertions
+### Range assertions (numbers and dates)
 
 - `lt(max)`: lower than
 - `lte(max)`: lower than or equal
 - `gt(min)`: greater than
 - `gte(min)`: greather than or equal
 
-### Length assertions
+### Discrete range assertions (any)
+
+- `inList(arr)`: in list of values
+- `notInList(arr)`: not in list of values
+
+### Length assertions (strings, arrays and objects)
 
 - `min(min)`: minimum length (_strings_ or _arrays_)
 - `max(max)`: maximum length (_strings_ or _arrays_)

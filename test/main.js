@@ -49,6 +49,11 @@ describe('Validators', function () {
         Validators.lte(3, 3).should.equal(true);
     });
 
+    it('should validate date ranges', function () {
+        Validators.gt(new Date('2012/12/12'), new Date('2012/12/13')).should.equal(true);
+        Validators.gt(new Date('2012/12/12'), new Date('2012/12/11')).should.equal(false);
+    });
+
     it('should validate booleans', function () {
         Validators.boolean(null).should.equal(true);
         Validators.boolean(undefined).should.equal(true);
@@ -71,6 +76,17 @@ describe('Validators', function () {
         Validators.array(undefined).should.equal(true);
         Validators.array([]).should.equal(true);
         Validators.array({}).should.equal(false);
+    });
+
+    it('should validate array ranges', function () {
+        should.not.exist(Validators.inList([1, 2, 3]));
+        should.not.exist(Validators.notInList([1, 2, 3]));
+
+        Validators.inList([1, 2, 3], 3).should.equal(true);
+        Validators.inList([1, 2, 3], 4).should.equal(false);
+
+        Validators.notInList([1, 2, 3], 3).should.equal(false);
+        Validators.notInList([1, 2, 3], 4).should.equal(true);
     });
 
     it('should validate dates', function () {
