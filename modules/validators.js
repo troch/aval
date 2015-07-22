@@ -97,8 +97,13 @@ function exactly(match, val) {
     return match === val;
 }
 
+function prop(name, validator, val) {
+    let propVal = exists(val) ? val[name] : null;
+    return [name, validator.validate(propVal)];
+}
+
 let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern, inList, notInList,
-    withElm, withoutElm, exactly};
+    withElm, withoutElm, exactly, prop};
 
 let types =  ['string', 'number', 'boolean', 'array', 'object', 'date', 'set'];
 

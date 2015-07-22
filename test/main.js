@@ -186,7 +186,7 @@ describe('Validators', function () {
 });
 
 describe('Izit', function () {
-    it('should return errors on props', function () {
+    it('should return report on values', function () {
         Izit().string().required().max(3).validate('abc')
             .should.eql({
                 valid: true,
@@ -213,6 +213,40 @@ describe('Izit', function () {
                 errors: {
                     string: false,
                     required: true
+                }
+            });
+    });
+
+    it('should be able to validate nested props', function () {
+        Izit()
+            .prop('name', Izit().string().required())
+            .validate({name: 'Thomas'})
+            .should.eql({
+                valid: true,
+                props: {
+                    name: {
+                        valid: true,
+                        errors: {
+                            string: false,
+                            required: false
+                        }
+                    }
+                }
+            });
+
+        Izit()
+            .prop('name', Izit().string().required())
+            .validate({name: null})
+            .should.eql({
+                valid: false,
+                props: {
+                    name: {
+                        valid: false,
+                        errors: {
+                            string: false,
+                            required: true
+                        }
+                    }
                 }
             });
     });
