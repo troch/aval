@@ -90,6 +90,8 @@ from the errors report.
     - `inList(arr)`: in array or Set
     - `notInList(arr)`: not in array or Set
 - __Values__
+    - `required()`: required value (null, undefined, empty array, empty object, empty string will all fail)
+    - `pattern(regex)`: pattern matching
     - `exactly(val)`: reference equality (any)
     - `withElm(elm)`: includes an element (array or Set)
     - `withoutElm(elm)`: excludes an element (array or Set)
@@ -98,9 +100,8 @@ from the errors report.
     - `max(max)`: maximum length (_strings_ or _arrays_)
     - `minKeys(min)`: minimum number of keys (_objects_)
     - `maxKeys(max)`: maximum number of keys (_objects_)
-- __Other__
-    - `required()`: required value (null, undefined, empty array, empty object, empty string will all fail)
-    - `pattern(regex)`: pattern matching
+- __Nested__
+    - `prop(name, validator)`: property validation
 
 
 ## Custom validator
