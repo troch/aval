@@ -66,7 +66,7 @@ function pattern(pattern, val) {
 
 let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern};
 
-let types =  ['string', 'number', 'string', 'boolean', 'array', 'object', 'date'];
+let types =  ['string', 'number', 'boolean', 'array', 'object', 'date'];
 
 types.forEach((type) => Validators[type] = createTypeValidator(type));
 
