@@ -11,7 +11,7 @@ function createTypeValidator(type) {
         if (type === 'object') {
             return !Array.isArray(val)  && typeof val === 'object' &&
                 !(val instanceof Set);
-        };
+        }
         return typeof val === type;
     };
 }
