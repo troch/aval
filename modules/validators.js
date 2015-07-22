@@ -6,8 +6,12 @@ function createTypeValidator(type) {
     return function typeChecker(val) {
         if (!exists(val))      return true;
         if (type === 'date')   return val instanceof Date;
+        if (type === 'set')    return val instanceof Set;
         if (type === 'array')  return Array.isArray(val);
-        if (type === 'object') return !Array.isArray(val) && type === 'object';
+        if (type === 'object') {
+            return !Array.isArray(val)  && typeof val === 'object' &&
+                !(val instanceof Set);
+        };
         return typeof val === type;
     };
 }
@@ -66,17 +70,37 @@ function pattern(pattern, val) {
 
 function inList(arr, val) {
     if (!exists(val)) return null;
+    if (arr instanceof Set) return arr.has(val);
     return arr.indexOf(val) !== -1;
 }
 
 function notInList(arr, val) {
     if (!exists(val)) return null;
+    if (arr instanceof Set) return !arr.has(val);
     return arr.indexOf(val) === -1;
 }
 
-let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern, inList, notInList};
+function withElm(elm, val) {
+    if (!exists(val)) return null;
+    if (val instanceof Set) return val.has(elm);
+    return val.indexOf(elm) !== -1;
+}
 
-let types =  ['string', 'number', 'boolean', 'array', 'object', 'date'];
+function withoutElm(elm, val) {
+    if (!exists(val)) return null;
+    if (val instanceof Set) return !val.has(elm);
+    return val.indexOf(elm) === -1;
+}
+
+function exactly(match, val) {
+    if (!exists(val)) return null;
+    return match === val;
+}
+
+let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern, inList, notInList,
+    withElm, withoutElm, exactly};
+
+let types =  ['string', 'number', 'boolean', 'array', 'object', 'date', 'set'];
 
 types.forEach((type) => Validators[type] = createTypeValidator(type));
 

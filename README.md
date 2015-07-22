@@ -73,35 +73,31 @@ validator.validate('hello');
 - For all other validators, a non-existing value will cause the validator to return `null`, excluding it
 from the errors report.
 
-### Types
-
-- `string()`
-- `number()`
-- `boolean()`
-- `object()`
-- `array()`
-- `date()`
-
-### Range assertions (numbers and dates)
-
-- `lt(max)`: lower than
-- `lte(max)`: lower than or equal
-- `gt(min)`: greater than
-- `gte(min)`: greather than or equal
-
-### Discrete range assertions (any)
-
-- `inList(arr)`: in list of values
-- `notInList(arr)`: not in list of values
-
-### Length assertions (strings, arrays and objects)
-
-- `min(min)`: minimum length (_strings_ or _arrays_)
-- `max(max)`: maximum length (_strings_ or _arrays_)
-- `minKeys(min)`: minimum number of keys (_objects_)
-- `maxKeys(max)`: maximum number of keys (_objects_)
-
-### Other
-
-- `required()`: required value (null, undefined, empty array, empty object, empty string will all fail)
-- `pattern(regex)`: pattern matching
+- __Types__
+    - `string()`
+    - `number()`
+    - `boolean()`
+    - `object()`
+    - `array()`
+    - `date()`
+    - `set()`
+- __Range assertions (numbers and dates)__
+    - `lt(max)`: lower than
+    - `lte(max)`: lower than or equal
+    - `gt(min)`: greater than
+    - `gte(min)`: greater than or equal
+- __Discrete range assertions (any)__
+    - `inList(arr)`: in array or Set
+    - `notInList(arr)`: not in array or Set
+- __Values__
+    - `exactly(val)`: reference equality (any)
+    - `withElm(elm)`: includes an element (array or Set)
+    - `withoutElm(elm)`: excludes an element (array or Set)
+- __Length assertions (strings, arrays and objects)__
+    - `min(min)`: minimum length (_strings_ or _arrays_)
+    - `max(max)`: maximum length (_strings_ or _arrays_)
+    - `minKeys(min)`: minimum number of keys (_objects_)
+    - `maxKeys(max)`: maximum number of keys (_objects_)
+- __Other__
+    - `required()`: required value (null, undefined, empty array, empty object, empty string will all fail)
+    - `pattern(regex)`: pattern matching

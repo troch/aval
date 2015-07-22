@@ -11,6 +11,11 @@ var addValidator = Iz.addValidator
 
 require('mocha');
 
+var set = new Set;
+set.add(1);
+set.add(2);
+set.add(3);
+
 describe('Validators', function () {
     it('should validate strings', function () {
         Validators.string(null).should.equal(true);
@@ -78,6 +83,13 @@ describe('Validators', function () {
         Validators.array({}).should.equal(false);
     });
 
+    it('should validate sets', function () {
+        Validators.set(null).should.equal(true);
+        Validators.set(undefined).should.equal(true);
+        Validators.set(new Set()).should.equal(true);
+        Validators.set({}).should.equal(false);
+    });
+
     it('should validate array ranges', function () {
         should.not.exist(Validators.inList([1, 2, 3]));
         should.not.exist(Validators.notInList([1, 2, 3]));
@@ -85,8 +97,14 @@ describe('Validators', function () {
         Validators.inList([1, 2, 3], 3).should.equal(true);
         Validators.inList([1, 2, 3], 4).should.equal(false);
 
+        Validators.inList(set, 3).should.equal(true);
+        Validators.inList(set, 4).should.equal(false);
+
         Validators.notInList([1, 2, 3], 3).should.equal(false);
         Validators.notInList([1, 2, 3], 4).should.equal(true);
+
+        Validators.notInList(set, 3).should.equal(false);
+        Validators.notInList(set, 4).should.equal(true);
     });
 
     it('should validate dates', function () {
@@ -141,6 +159,30 @@ describe('Validators', function () {
         Validators.pattern(/^\d{1,3}$/, '123').should.equal(true);
         Validators.pattern(/^\d{1,3}$/, '1234').should.equal(false);
     });
+
+    it('should validate lists', function () {
+        should.not.exist(Validators.withElm(3, null));
+        Validators.withElm(3, [1, 2, 3]).should.equal(true);
+        Validators.withElm(4, [1, 2, 3]).should.equal(false);
+
+        should.not.exist(Validators.withoutElm(3, null));
+        Validators.withoutElm(3, [1, 2, 3]).should.equal(false);
+        Validators.withoutElm(4, [1, 2, 3]).should.equal(true);
+
+        Validators.withElm(3, set).should.equal(true);
+        Validators.withElm(4, set).should.equal(false);
+
+        Validators.withoutElm(3, set).should.equal(false);
+        Validators.withoutElm(4, set).should.equal(true);
+    });
+
+    it('should match values', function () {
+        should.not.exist(Validators.exactly(3, null));
+
+        Validators.exactly(3, 3).should.equal(true);
+        Validators.exactly(3, 4).should.equal(false);
+        Validators.exactly([1], [1]).should.equal(false);
+    })
 });
 
 describe('Izit', function () {
@@ -181,8 +223,8 @@ describe('Izit', function () {
             return colour === val;
         });
 
-        Validators.colour('red', 'red').should.equal.true;
-        Validators.colour('red', 'green').should.equal.false;
+        Validators.colour('red', 'red').should.equal(true);
+        Validators.colour('red', 'green').should.equal(false);
         should.not.exist(Validators.colour('red'));
 
         Izit().string().required().colour('red').validate('red')
