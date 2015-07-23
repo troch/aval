@@ -34,37 +34,37 @@ import {Izit} from 'izit';
 
 let validator = Izit().string().required().min(3);
 
-validator.validate(null)
-// = {
-//     valid: false,
-//     errors: {
-//       string:   false,
-//       required: false
-//     }
-//   }
-//
+validato
+    r.validate(null === {
+       valid: false,
+       errors: {
+         string:   false,
+         required: false
+       }
+     }
 
-validator.validate('hi');
-// = {
-//     valid: false,
-//     errors: {
-//       string:   false,
-//       required: false,
-//       min:      true
-//     }
-//   }
-//
 
-validator.validate('hello');
-// = {
-//     valid: true,
-//     errors: {
-//       string:   false,
-//       required: false,
-//       min:      false
-//     }
-//   }
-//
+validator
+    .validate('hi') === {
+       valid: false,
+       errors: {
+         string:   false,
+         required: false,
+         min:      true
+       }
+     }
+
+
+validator.va
+    lidate('hello') === {
+       valid: true,
+       errors: {
+         string:   false,
+         required: false,
+         min:      false
+       }
+     }
+
 ```
 
 ## Validators
@@ -126,15 +126,15 @@ let data = {
 
 let validator = Izit().object().required().matchPwd();
 
-validator.validate(data);
-// = {
-//     valid: false,
-//     errors: {
-//       object:   false,
-//       required: false,
-//       matchPwd: true
-//     }
-//
+validator
+    .validate(data) === {
+       valid: false,
+       errors: {
+         object:   false,
+         required: false,
+         matchPwd: true
+       }
+
 
 ```
 
@@ -157,39 +157,39 @@ let validator = Izit().object().required().matchPwd()
     .prop('email',    Izit().string().required().pattern(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/))
     .prop('password', Izit().string().required().min(5));
 
-validator.validate(data);
-// = {
-//     valid: false,
-//     errors: {
-//       object:   false,
-//       required: false,
-//       matchPwd: true
-//     },
-//     props: {
-//       username: {
-//         valid: true,
-//         errors: {
-//           string:   false,
-//           required: false,
-//           min:      false
-//         }
-//       },
-//       email: {
-//         valid: false,
-//         errors: {
-//           string:   false,
-//           required: true
-//         }
-//       },
-//       password: {
-//         valid: true,
-//         errors: {
-//           string:   false,
-//           required: false,
-//           min:      false
-//         }
-//       }
-//     }
-//   }
-//
+validator
+    .validate(data) === {
+       valid: false,
+       errors: {
+         object:   false,
+         required: false,
+         matchPwd: true
+       },
+       props: {
+         username: {
+           valid: true,
+           errors: {
+             string:   false,
+             required: false,
+             min:      false
+           }
+         },
+         email: {
+           valid: false,
+           errors: {
+             string:   false,
+             required: true
+           }
+         },
+         password: {
+           valid: true,
+           errors: {
+             string:   false,
+             required: false,
+             min:      false
+           }
+         }
+       }
+     }
+
 ```
