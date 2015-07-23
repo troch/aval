@@ -108,6 +108,7 @@ from the errors report.
     - `maxKeys(max)`: maximum number of keys (_objects_)
 - __Nested__
     - `prop(name, validator)`: property validation
+    - `every(validator)`: all elements validation (collection: array or Set)
 
 
 ## Custom validator

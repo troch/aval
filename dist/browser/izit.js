@@ -1,6 +1,6 @@
 /**
  * @license
- * @version 0.1.0-alpha.1
+ * @version 0.1.1
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Thomas Roch
@@ -24,6 +24,8 @@
  * SOFTWARE.
  */
 (function (window) {
+    
+    function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
     
     function exists(val) {
         return val !== undefined && val !== null;
@@ -130,7 +132,7 @@
     
     function every(validator, val) {
         if (!exists(val) || !val.length) return null;
-        var elements = val.map(function (elm) {
+        var elements = [].concat(_toConsumableArray(val)).map(function (elm) {
             return validator.validate(elm);
         });
         return [elements.every(function (r) {

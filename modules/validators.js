@@ -104,7 +104,7 @@ function prop(name, validator, val) {
 
 function every(validator, val) {
     if (!exists(val) || !val.length) return null;
-    let elements = val.map(elm => validator.validate(elm));
+    let elements = [...val].map(elm => validator.validate(elm));
     return [elements.every(r => r.valid), elements];
 }
 
