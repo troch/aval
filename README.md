@@ -44,26 +44,28 @@ validato
      }
 
 
-validator
-    .validate('hi') === {
-       valid: false,
-       errors: {
-         string:   false,
-         required: false,
-         min:      true
-       }
-     }
+let report = validator.validate('hi')
+// Will output
+report = {
+    valid: false,
+    errors: {
+        string:   false,
+        required: false,
+        min:      true
+    }
+}
 
 
-validator.va
-    lidate('hello') === {
-       valid: true,
-       errors: {
-         string:   false,
-         required: false,
-         min:      false
-       }
-     }
+report = validator.validate('hello')
+// Will output
+report = {
+    valid: true,
+    errors: {
+        string:   false,
+        required: false,
+        min:      false
+    }
+}
 
 ```
 
@@ -126,16 +128,16 @@ let data = {
 
 let validator = Izit().object().required().matchPwd();
 
-validator
-    .validate(data) === {
-       valid: false,
-       errors: {
-         object:   false,
-         required: false,
-         matchPwd: true
-       }
-
-
+let report = validator.validate(data)
+// Will output
+report = {
+    valid: false,
+    errors: {
+        object:   false,
+        required: false,
+        matchPwd: true
+    }
+}
 ```
 
 ## Nested properties
@@ -157,39 +159,39 @@ let validator = Izit().object().required().matchPwd()
     .prop('email',    Izit().string().required().pattern(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/))
     .prop('password', Izit().string().required().min(5));
 
-validator
-    .validate(data) === {
-       valid: false,
-       errors: {
-         object:   false,
-         required: false,
-         matchPwd: true
-       },
-       props: {
-         username: {
-           valid: true,
-           errors: {
-             string:   false,
-             required: false,
-             min:      false
-           }
-         },
-         email: {
-           valid: false,
-           errors: {
-             string:   false,
-             required: true
-           }
-         },
-         password: {
-           valid: true,
-           errors: {
-             string:   false,
-             required: false,
-             min:      false
-           }
-         }
-       }
-     }
-
+let report = validator.validate(data)
+// Will output
+report = {
+    valid: false,
+    errors: {
+        object:   false,
+        required: false,
+        matchPwd: true
+    },
+    props: {
+        username: {
+            valid: true,
+            errors: {
+                string:   false,
+                required: false,
+                min:      false
+            }
+        },
+        email: {
+            valid: false,
+            errors: {
+                string:   false,
+                required: true
+            }
+        },
+        password: {
+            valid: true,
+            errors: {
+                string:   false,
+                required: false,
+                min:      false
+            }
+        }
+    }
+}
 ```
