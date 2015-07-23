@@ -1,6 +1,6 @@
 {
   "name": "izit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A minimalist property validator",
   "main": "dist/commonjs/index.js",
   "scripts": {
