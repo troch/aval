@@ -6,7 +6,7 @@
 
 > A minimalist functional validation library. Inspired by joi, React PropTypes and Angular form validation.
 
-Izit is an ultra lightweight library to help validate JS data and is aimed at helping form validation feedback.
+Izit is a lightweight library to help validate JS data and is aimed at helping form validation feedback.
 
 ## Why?
 
