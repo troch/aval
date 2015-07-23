@@ -180,7 +180,7 @@ describe('Validators', function () {
         Validators.exactly(3, 3).should.equal(true);
         Validators.exactly(3, 4).should.equal(false);
         Validators.exactly([1], [1]).should.equal(false);
-    })
+    });
 });
 
 describe('Izit', function () {
@@ -268,5 +268,46 @@ describe('Izit', function () {
                     colour: false
                 }
             });
+    });
+
+    it('should validate collections', function () {
+        addValidator('even', function (val) {
+            if (val === null || val === undefined) return null;
+            return val % 2 === 0;
+        });
+
+        var evenNumbers = [2, 4, 6, 7]
+        var validator = Izit().array().required().min(2)
+            .every(Izit().number().even())
+
+        var report = validator.validate(evenNumbers)
+        // Will output
+        report.should.eql({
+            valid: false,
+            errors: {
+                array:    false,
+                required: false,
+                min:      false,
+                every:    true
+            },
+            elements: [
+                {
+                    valid: true,
+                    errors: {number: false, even: false}
+                },
+                {
+                    valid: true,
+                    errors: {number: false, even: false}
+                },
+                {
+                    valid: true,
+                    errors: {number: false, even: false}
+                },
+                {
+                    valid: false,
+                    errors: {number: false, even: true}
+                }
+            ]
+        })
     });
 });

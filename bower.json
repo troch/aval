@@ -24,7 +24,7 @@
     "coverage",
     "scripts",
     "npm-debug.log",
-    "tests",
+    "test",
     "bower.json",
     "README.md",
     ".travis.yml",
