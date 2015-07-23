@@ -196,3 +196,56 @@ report = {
     }
 }
 ```
+
+## Collections
+
+You can apply the `every`\ validator on all elements of an array, allowing you to easily validate collections.
+Only one `every` validator per property is allowed.
+
+```javascript
+import Izit, {addValidator} from 'izit'
+
+// Let's create a custom validator for even numbers
+addValidator('even', val => {
+    // if (val === null || val === undefined) return null;
+    return val % 2 === 0;
+})
+
+// Let's validate this array
+let evenNumbers = [2, 4, 6, 7]
+
+// Validator (minimum 2 numbers, all even)
+let validator = Izit()
+    .array().required().min(2)
+    .every(Izit().number().even())
+
+let report = validator.validate(evenNumbers)
+// Will output
+report = {
+    valid: false,
+    errors: {
+        array:    false,
+        required: false,
+        min:      false,
+        every:    true
+    },
+    elements: [
+        {
+            valid: true,
+            errors: {number: false, even: false}
+        },
+        {
+            valid: true,
+            errors: {number: false, even: false}
+        },
+        {
+            valid: true,
+            errors: {number: false, even: false}
+        },
+        {
+            valid: false,
+            errors: {number: false, even: true}
+        }
+    ]
+}
+```

@@ -36,7 +36,7 @@ class Izit {
         if (elmValidators.length) {
             let res = elmValidators[0][1](val);
             if (res !== null) {
-                // errors.every = !res[0];
+                errors.every = !res[0];
                 elements = res[1];
             } else elements = [];
         }
