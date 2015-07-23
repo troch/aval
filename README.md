@@ -20,9 +20,12 @@ There are a LOT of JavaScript data validators, however here are a few facts abou
 
 ## Installation
 
-It is available on npm:
+It is available on npm and bower:
 
     $ npm install --save izit
+    $ bower install --save izit
+
+It is available in commonJs format, AMD and global (bundled and uglified).
 
 ## Usage
 
