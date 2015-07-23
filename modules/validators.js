@@ -102,8 +102,14 @@ function prop(name, validator, val) {
     return [name, validator.validate(propVal)];
 }
 
+function every(validator, val) {
+    if (!exists(val) || !val.length) return null;
+    let elements = val.map(elm => validator.validate(elm));
+    return [elements.every(r => r.valid), elements];
+}
+
 let Validators = {required, gt, gte, lt, lte, max, min, maxKeys, minKeys, pattern, inList, notInList,
-    withElm, withoutElm, exactly, prop};
+    withElm, withoutElm, exactly, prop, every};
 
 let types =  ['string', 'number', 'boolean', 'array', 'object', 'date', 'set'];
 

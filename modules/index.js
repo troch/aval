@@ -21,7 +21,7 @@ class Izit {
     }
 
     validate(val) {
-        let nonPropValidators = this.validators.filter(validator => validator[0] !== 'prop');
+        let nonPropValidators = this.validators.filter(validator => !/^(prop|every)$/.test(validator[0]));
         let errors =
             nonPropValidators.length
                 ? nonPropValidators.reduce((errors, def) => {
@@ -30,6 +30,16 @@ class Izit {
                         return errors;
                     }, {})
                 : {};
+
+        let elmValidators = this.validators.filter(v => v[0] === 'every');
+        let elements = null;
+        if (elmValidators.length) {
+            let res = elmValidators[0][1](val);
+            if (res !== null) {
+                // errors.every = !res[0];
+                elements = res[1];
+            } else elements = [];
+        }
 
         let propValidators = this.validators.filter(v => v[0] === 'prop');
         let props =
@@ -47,6 +57,7 @@ class Izit {
         let report = {valid};
         if (nonPropValidators.length) report.errors = errors;
         if (propValidators.length)    report.props  = props;
+        if (elements !== null)        report.elements = elements;
         return report;
     }
 }
