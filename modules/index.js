@@ -62,10 +62,8 @@ class Izit {
     }
 }
 
-export default {
-    addValidator,
-    Validators,
-    Izit() {
-        return new Izit;
-    }
-};
+let IzitFactory = () => new Izit;
+IzitFactory.addValidator = addValidator;
+IzitFactory.Validators = Validators;
+
+export default IzitFactory

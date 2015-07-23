@@ -2,13 +2,11 @@
 
 var path      = require('path');
 var pkg       = require('../package.json');
-var Iz        = require(path.join(__dirname, '..', pkg.main));
+var Izit      = require(path.join(__dirname, '..', pkg.main));
 var should    = require('should');
 
-var Izit = Iz.Izit
-var Validators = Iz.Validators
-var addValidator = Iz.addValidator
-
+var Validators = Izit.Validators
+var addValidator = Izit.addValidator
 require('mocha');
 
 var set = new Set;

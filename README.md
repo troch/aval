@@ -30,18 +30,19 @@ Get a new instance of `Izit` and chain validators. Calling `validate(val)`
 will output an object containing a `valid` boolean and a key-value pairs object `errors`.
 
 ```javascript
-import {Izit} from 'izit';
+import Izit from 'izit';
 
 let validator = Izit().string().required().min(3);
 
-validato
-    r.validate(null === {
-       valid: false,
-       errors: {
-         string:   false,
-         required: false
-       }
-     }
+let report = validator.validate(null);
+// Will output
+report = {
+    valid: false,
+    errors: {
+        string:   false,
+        required: false
+    }
+}
 
 
 let report = validator.validate('hi')
@@ -112,7 +113,7 @@ You can define custom validators. A validator can take a number of arguments, al
 to validate.
 
 ```javascript
-import {Izit, addValidator} from 'izit'
+import Izit, {addValidator} from 'izit'
 
 addValidator('matchPwd', function (val) {
     if (!val) return null;
@@ -145,7 +146,7 @@ report = {
 You can validate nested properties (as deep as you want).
 
 ```javascript
-import {Izit} from 'izit'
+import Izit from 'izit'
 
 let data = {
     username: 'troch',
