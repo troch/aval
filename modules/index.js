@@ -66,4 +66,4 @@ let IzitFactory = () => new Izit;
 IzitFactory.addValidator = addValidator;
 IzitFactory.Validators = Validators;
 
-export default IzitFactory
+export default IzitFactory;
