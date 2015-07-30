@@ -2,11 +2,11 @@
 
 var path      = require('path');
 var pkg       = require('../package.json');
-var Izit      = require(path.join(__dirname, '..', pkg.main));
+var Aval      = require(path.join(__dirname, '..', pkg.main));
 var should    = require('should');
 
-var Validators = Izit.Validators
-var addValidator = Izit.addValidator
+var Validators = Aval.Validators
+var addValidator = Aval.addValidator
 require('mocha');
 
 var set = new Set;
@@ -183,9 +183,9 @@ describe('Validators', function () {
     });
 });
 
-describe('Izit', function () {
+describe('Aval', function () {
     it('should return report on values', function () {
-        Izit().string().required().max(3).validate('abc')
+        Aval().string().required().max(3).validate('abc')
             .should.eql({
                 valid: true,
                 errors: {
@@ -195,7 +195,7 @@ describe('Izit', function () {
                 }
             });
 
-        Izit().string().required().max(3).validate('abcd')
+        Aval().string().required().max(3).validate('abcd')
             .should.eql({
                 valid: false,
                 errors: {
@@ -205,7 +205,7 @@ describe('Izit', function () {
                 }
             });
 
-        Izit().string().required().max(2).validate(null)
+        Aval().string().required().max(2).validate(null)
             .should.eql({
                 valid: false,
                 errors: {
@@ -216,8 +216,8 @@ describe('Izit', function () {
     });
 
     it('should be able to validate nested props', function () {
-        Izit()
-            .prop('name', Izit().string().required())
+        Aval()
+            .prop('name', Aval().string().required())
             .validate({name: 'Thomas'})
             .should.eql({
                 valid: true,
@@ -232,8 +232,8 @@ describe('Izit', function () {
                 }
             });
 
-        Izit()
-            .prop('name', Izit().string().required())
+        Aval()
+            .prop('name', Aval().string().required())
             .validate({name: null})
             .should.eql({
                 valid: false,
@@ -259,7 +259,7 @@ describe('Izit', function () {
         Validators.colour('red', 'green').should.equal(false);
         should.not.exist(Validators.colour('red'));
 
-        Izit().string().required().colour('red').validate('red')
+        Aval().string().required().colour('red').validate('red')
             .should.eql({
                 valid: true,
                 errors: {
@@ -277,8 +277,8 @@ describe('Izit', function () {
         });
 
         var evenNumbers = [2, 4, 6, 7]
-        var validator = Izit().array().required().min(2)
-            .every(Izit().number().even())
+        var validator = Aval().array().required().min(2)
+            .every(Aval().number().even())
 
         var report = validator.validate(evenNumbers)
         // Will output

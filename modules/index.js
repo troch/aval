@@ -5,7 +5,7 @@ function addValidator(name, fn) {
     Validators[name] = fn;
 }
 
-class Izit {
+class Aval {
     constructor() {
         this.validators = [];
 
@@ -62,8 +62,8 @@ class Izit {
     }
 }
 
-let IzitFactory = () => new Izit;
-IzitFactory.addValidator = addValidator;
-IzitFactory.Validators = Validators;
+let AvalFactory = () => new Aval;
+AvalFactory.addValidator = addValidator;
+AvalFactory.Validators = Validators;
 
-export default IzitFactory;
+export default AvalFactory;

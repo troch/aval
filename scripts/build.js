@@ -3,7 +3,7 @@ var path        = require('path');
 var fs          = require('fs');
 var async       = require('async');
 
-var izitVersion = require('../package.json').version;
+var avalVersion = require('../package.json').version;
 
 var files       = [
     path.join(__dirname, '../modules/index.js'),
@@ -36,7 +36,7 @@ function buildBundle(done) {
         var license = results[0].toString().trim().split('\n').map(function (line) {
             return ' * ' + line;
         }).join('\n');
-        license = '/**\n * @license\n * @version ' + izitVersion + '\n' + license + '\n */';
+        license = '/**\n * @license\n * @version ' + avalVersion + '\n' + license + '\n */';
 
         var indexSrc = results[1].code.trim();
         var validatorsSrc = results[2].code.trim();
@@ -49,11 +49,11 @@ function buildBundle(done) {
 
         var globalHeader = '\n(function (window) {\n';
         var globalFooter = '\n}(window));\n';
-        var globalExport = '\n\n    window.Izit = IzitFactory;\n';
+        var globalExport = '\n\n    window.Aval = AvalFactory;\n';
 
-        var amdHeader = "\ndefine('izit', [], function () {\n";
+        var amdHeader = "\ndefine('aval', [], function () {\n";
         var amdFooter = '\n});\n';
-        var amdExport = '\n\n    return {Izit: IzitFactory};';
+        var amdExport = '\n\n    return {Aval: AvalFactory};';
 
         var useStrict = "'use strict';\n";
 
@@ -61,8 +61,8 @@ function buildBundle(done) {
         var amdCode = license + amdHeader + bundledCode + amdExport + amdFooter;
 
         async.parallel([
-            fs.writeFile.bind(fs, path.join(__dirname, '../dist/browser/izit.js'), globalCode),
-            fs.writeFile.bind(fs, path.join(__dirname, '../dist/amd/izit.js'), amdCode)
+            fs.writeFile.bind(fs, path.join(__dirname, '../dist/browser/aval.js'), globalCode),
+            fs.writeFile.bind(fs, path.join(__dirname, '../dist/amd/aval.js'), amdCode)
         ], done)
     })
 }

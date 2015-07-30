@@ -6,7 +6,7 @@ var source = require('vinyl-source-stream');
 function conventionalChangelog(done) {
     clog({
             preset: 'angular',
-            repository: 'https://github.com/troch/izit'
+            repository: 'https://github.com/troch/aval'
         })
         .pipe(source('CHANGELOG.md'))
         .pipe(fs.dest(path.join(__dirname, '..')));

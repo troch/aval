@@ -21,11 +21,11 @@ function addValidator(name, fn) {
     _validators2['default'][name] = fn;
 }
 
-var Izit = (function () {
-    function Izit() {
+var Aval = (function () {
+    function Aval() {
         var _this = this;
 
-        _classCallCheck(this, Izit);
+        _classCallCheck(this, Aval);
 
         this.validators = [];
 
@@ -40,7 +40,7 @@ var Izit = (function () {
         });
     }
 
-    _createClass(Izit, [{
+    _createClass(Aval, [{
         key: 'validate',
         value: function validate(val) {
             var nonPropValidators = this.validators.filter(function (validator) {
@@ -93,14 +93,14 @@ var Izit = (function () {
         }
     }]);
 
-    return Izit;
+    return Aval;
 })();
 
-var IzitFactory = function IzitFactory() {
-    return new Izit();
+var AvalFactory = function AvalFactory() {
+    return new Aval();
 };
-IzitFactory.addValidator = addValidator;
-IzitFactory.Validators = _validators2['default'];
+AvalFactory.addValidator = addValidator;
+AvalFactory.Validators = _validators2['default'];
 
-exports['default'] = IzitFactory;
+exports['default'] = AvalFactory;
 module.exports = exports['default'];

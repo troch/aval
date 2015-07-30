@@ -1,12 +1,12 @@
 {
-  "name": "izit",
+  "name": "aval",
   "version": "0.1.2",
-  "homepage": "https://github.com/troch/izit",
+  "homepage": "https://github.com/troch/aval",
   "authors": [
     "Thomas Roch <thomas.c.roch@gmail.com>"
   ],
   "description": "Minimalist functional javascript data validator",
-  "main": "dist/browser/izit.min.js",
+  "main": "dist/browser/aval.min.js",
   "moduleType": [
     "amd",
     "es6",

@@ -1,6 +1,6 @@
 /**
  * @license
- * @version 0.1.2
+ * @version 0.1.3
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Thomas Roch
@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-define('izit', [], function () {
+define('aval', [], function () {
     
     function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
     
@@ -159,11 +159,11 @@ define('izit', [], function () {
         Validators[name] = fn;
     }
     
-    var Izit = (function () {
-        function Izit() {
+    var Aval = (function () {
+        function Aval() {
             var _this = this;
     
-            _classCallCheck(this, Izit);
+            _classCallCheck(this, Aval);
     
             this.validators = [];
     
@@ -178,7 +178,7 @@ define('izit', [], function () {
             });
         }
     
-        _createClass(Izit, [{
+        _createClass(Aval, [{
             key: 'validate',
             value: function validate(val) {
                 var nonPropValidators = this.validators.filter(function (validator) {
@@ -231,14 +231,14 @@ define('izit', [], function () {
             }
         }]);
     
-        return Izit;
+        return Aval;
     })();
     
-    var IzitFactory = function IzitFactory() {
-        return new Izit();
+    var AvalFactory = function AvalFactory() {
+        return new Aval();
     };
-    IzitFactory.addValidator = addValidator;
-    IzitFactory.Validators = Validators;
+    AvalFactory.addValidator = addValidator;
+    AvalFactory.Validators = Validators;
 
-    return {Izit: IzitFactory};
+    return {Aval: AvalFactory};
 });

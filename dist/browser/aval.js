@@ -1,6 +1,6 @@
 /**
  * @license
- * @version 0.1.2
+ * @version 0.1.3
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Thomas Roch
@@ -159,11 +159,11 @@
         Validators[name] = fn;
     }
     
-    var Izit = (function () {
-        function Izit() {
+    var Aval = (function () {
+        function Aval() {
             var _this = this;
     
-            _classCallCheck(this, Izit);
+            _classCallCheck(this, Aval);
     
             this.validators = [];
     
@@ -178,7 +178,7 @@
             });
         }
     
-        _createClass(Izit, [{
+        _createClass(Aval, [{
             key: 'validate',
             value: function validate(val) {
                 var nonPropValidators = this.validators.filter(function (validator) {
@@ -231,15 +231,15 @@
             }
         }]);
     
-        return Izit;
+        return Aval;
     })();
     
-    var IzitFactory = function IzitFactory() {
-        return new Izit();
+    var AvalFactory = function AvalFactory() {
+        return new Aval();
     };
-    IzitFactory.addValidator = addValidator;
-    IzitFactory.Validators = Validators;
+    AvalFactory.addValidator = addValidator;
+    AvalFactory.Validators = Validators;
 
-    window.Izit = IzitFactory;
+    window.Aval = AvalFactory;
 
 }(window));
